@@ -15,6 +15,6 @@
     <%= line_item.quantity %>
   </td>
   <td>
-    <%= humanized_money_with_symbol product.price * line_item.total_price_cents / 100 %>
+    <%= humanized_money_with_symbol line_item.total_price_cents / 100.0 %>
   </td>
 </tr>
