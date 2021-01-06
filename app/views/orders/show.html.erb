@@ -7,7 +7,13 @@
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
   </div>
+  
 
+    <% # raise @order.inspect %>
+    <% render 'order' %>
+
+
+  <% # raise @line_items.inspect %>
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
