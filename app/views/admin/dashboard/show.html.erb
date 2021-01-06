@@ -1,2 +1,10 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<h1>Admin >> Dashboard</h1>
+<div>
+  Categories currently in the database: 
+  <%= @category_count %>
+</div>
+<div>
+  <%= link_to 'Products', [:admin, :products] %>
+  currently in the database: 
+  <%= @product_count %>
+</div>
