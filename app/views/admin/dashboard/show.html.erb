@@ -1,10 +1,18 @@
 <h1>Admin >> Dashboard</h1>
-<div>
-  Categories currently in the database: 
+<div class="dashboard-line">
+<div class="bg-success dashboard-info info-name">
+  CATEGORIES 
+</div>
+<div class="bg-success dashboard-info info-counter">
   <%= @category_count %>
 </div>
-<div>
-  <%= link_to 'Products', [:admin, :products] %>
-  currently in the database: 
+</div>
+
+<div class="dashboard-line">
+<div class="bg-info dashboard-info info-name">
+  <%= link_to 'PRODUCTS', [:admin, :products] %>
+</div>
+<div class="bg-info dashboard-info info-counter">
   <%= @product_count %>
+</div>
 </div>
