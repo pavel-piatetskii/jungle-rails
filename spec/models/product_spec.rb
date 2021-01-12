@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
 
   describe 'Validations' do
-    # validation tests/examples here
 
     # Valid save operation
     it 'saves a product with all 4 fields filled' do
