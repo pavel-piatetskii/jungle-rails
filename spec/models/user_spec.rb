@@ -113,8 +113,10 @@ RSpec.describe User, type: :model do
     end
   end
 
+
   describe '.authenticate_with_credentials' do
     
+    # Successful authentication returns user object
     it 'authentificates user with valid credentals' do
       @user = User.new({
         name: 'Johnny Silverhand',
@@ -123,7 +125,47 @@ RSpec.describe User, type: :model do
         password_confirmation: 'wakeup'
       })
       @user.save
-      byebug
+      user_auth = User.authenticate_with_credentials('samurai@example.com', 'wakeup')
+      expect(user_auth.name).to eq('Johnny Silverhand')
+    end
+
+    # Failed authentication returns nil
+    it 'returns nil is credentials are wrong' do
+      @user = User.new({
+        name: 'Johnny Silverhand',
+        email: 'samurai@example.com',
+        password: 'wakeup',
+        password_confirmation: 'wakeup'
+      })
+      @user.save
+      user_auth = User.authenticate_with_credentials('samurai@example.com', 'wake')
+      expect(user_auth).to eq(nil)
+    end
+
+    # Authentication succeeds if a user enters extra spaces before / after email
+    it 'authenticates user with valid credentals' do
+      @user = User.new({
+        name: 'Johnny Silverhand',
+        email: 'samurai@example.com',
+        password: 'wakeup',
+        password_confirmation: 'wakeup'
+      })
+      @user.save
+      user_auth = User.authenticate_with_credentials('   samurai@example.com   ', 'wakeup')
+      expect(user_auth.name).to eq('Johnny Silverhand')
+    end
+
+    # Authentication succeeds despite the case of email characteers
+    it 'authenticates user with valid case-insensitive email' do
+      @user = User.new({
+        name: 'Johnny Silverhand',
+        email: 'Samurai@examplE.com',
+        password: 'wakeup',
+        password_confirmation: 'wakeup'
+      })
+      @user.save
+      user_auth = User.authenticate_with_credentials('Samurai@examplE.com', 'wakeup')
+      expect(user_auth.name).to eq('Johnny Silverhand')
     end
 
   end

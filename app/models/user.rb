@@ -7,10 +7,12 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
 
   has_secure_password
-  
 
-  def authenticate_with_credentials(email, password)
-    user = User.find_by(email: email).authenticate(password)
+
+  def self.authenticate_with_credentials(email, password)
+    email.strip!
+    email.downcase!
+    user = self.where("lower(email) = ?", email)[0].authenticate(password)
     user ? user : nil
   end
 
